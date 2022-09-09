@@ -75,6 +75,12 @@ export default {
         isEditing() {
             this.initPlayer();
         },
+        'content.url'() {
+            this.initPlayer();
+        },
+        startTime() {
+            this.initPlayer();
+        },
     },
     mounted() {
         this.handleScript();
