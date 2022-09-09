@@ -66,10 +66,6 @@ export default {
             if (!this.content.url) return {};
             return this.content.url.split('tv/videos/')[1].split('?')[0];
         },
-        channelName() {
-            if (!this.content.url) return {};
-            return this.content.url.split('tv/')[1].split('?')[0];
-        },
         startTime() {
             if (typeof this.content.videoStartTime !== 'string') return '0h0m0s';
             return this.content.videoStartTime;

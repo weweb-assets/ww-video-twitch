@@ -24,7 +24,7 @@ export default {
                 placeholder: 'Url',
             },
             bindable: true,
-            defaultValue: 'https://www.twitch.tv/videos/1579142420',
+            defaultValue: '',
         },
         videoStartTime: {
             label: {
