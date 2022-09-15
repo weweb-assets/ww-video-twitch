@@ -22,10 +22,10 @@ export default {
     setup(props) {
         const player = null;
         const uniqueID = wwLib.wwUtils.getUniqueId();
-        const { variableValue: isPlayedVariableValue, setValue: setIsPlayedValue } =
+        const { variableValue: isPlayingVariableValue, setValue: setIsPlayingValue } =
             wwLib.wwVariable.useComponentVariable({
                 uid: props.uid,
-                name: 'Is Played',
+                name: 'Is Playing',
                 type: 'boolean',
                 defaultValue: false,
                 readonly: true,
@@ -42,8 +42,8 @@ export default {
         return {
             player,
             uniqueID,
-            isPlayedVariableValue,
-            setIsPlayedValue,
+            isPlayingVariableValue,
+            setIsPlayingValue,
             currentTimeVariableValue,
             setCurrentTimeValue,
         };
@@ -117,8 +117,8 @@ export default {
 
             if (this.isEditing) return;
             this.timeUpdater = setInterval(() => this.updateCurrentTime(this.player.getCurrentTime()), 250);
-            this.player.addEventListener(Twitch.Player.PLAY, () => this.updateIsPlayed(true));
-            this.player.addEventListener(Twitch.Player.PAUSE, () => this.updateIsPlayed(false));
+            this.player.addEventListener(Twitch.Player.PLAY, () => this.updateIsPlaying(true));
+            this.player.addEventListener(Twitch.Player.PAUSE, () => this.updateIsPlaying(false));
             this.player.addEventListener(Twitch.Player.ENDED, () => {
                 this.$emit('trigger-event', { name: 'end', event: {} });
             });
@@ -127,9 +127,9 @@ export default {
             if (typeof currentTime !== 'number') return;
             this.setCurrentTimeValue(currentTime.toFixed(2));
         },
-        updateIsPlayed(isPlayed) {
-            this.setIsPlayedValue(isPlayed);
-            if (isPlayed) {
+        updateIsPlaying(isPlaying) {
+            this.setIsPlayingValue(isPlaying);
+            if (isPlaying) {
                 this.$emit('trigger-event', { name: 'play', event: {} });
             } else {
                 this.$emit('trigger-event', { name: 'pause', event: {} });
@@ -137,8 +137,8 @@ export default {
         },
         clearEvents() {
             if (!this.player) return;
-            this.player.removeEventListener(Twitch.Player.PLAY, () => this.updateIsPlayed(true));
-            this.player.removeEventListener(Twitch.Player.PAUSE, () => this.updateIsPlayed(false));
+            this.player.removeEventListener(Twitch.Player.PLAY, () => this.updateIsPlaying(true));
+            this.player.removeEventListener(Twitch.Player.PAUSE, () => this.updateIsPlaying(false));
             this.player.removeEventListener(Twitch.Player.ENDED, () => {
                 this.$emit('trigger-event', { name: 'end', event: {} });
             });
