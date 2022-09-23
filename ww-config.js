@@ -24,26 +24,19 @@ export default {
                 placeholder: 'Url',
             },
             bindable: true,
-            hidden: content => content.provider === 'weweb',
-            defaultValue: 'https://www.dailymotion.com/video/x84sh87',
+            defaultValue: '',
         },
         videoStartTime: {
             label: {
-                en: 'Start time (s)',
+                en: 'Start time',
             },
-            type: 'Number',
-            options: (_, sidepanelContent) => {
-                console.log(sidepanelContent.videoDuration);
-                return { min: 0, max: sidepanelContent.videoDuration };
+            type: 'Text',
+            options: {
+                placeholder: '0h0m0s',
             },
             section: 'settings',
             bindable: true,
-            defaultValue: 0,
-        },
-        videoDuration: {
-            editorOnly: true,
-            defaultValue: 0,
-            hidden: true,
+            defaultValue: '',
         },
         autoplay: {
             label: { en: 'Autoplay', fr: 'Lecture automatique' },
@@ -86,48 +79,6 @@ export default {
                 ],
             },
             defaultValue: false,
-        },
-        loop: {
-            label: { en: 'Loop', fr: 'Lecture en boucle' },
-            type: 'TextRadioGroup',
-            section: 'settings',
-            options: {
-                choices: [
-                    {
-                        default: true,
-                        value: false,
-                        title: { en: 'Start', fr: 'Début' },
-                        icon: 'none',
-                    },
-                    {
-                        value: true,
-                        title: { en: 'Center', fr: 'Milieu' },
-                        icon: 'tick',
-                    },
-                ],
-            },
-            defaultValue: false,
-        },
-        controls: {
-            label: { en: 'Controls', fr: 'Contrôles' },
-            type: 'TextRadioGroup',
-            section: 'settings',
-            options: {
-                choices: [
-                    {
-                        value: false,
-                        title: { en: 'Start', fr: 'Début' },
-                        icon: 'none',
-                    },
-                    {
-                        default: true,
-                        value: true,
-                        title: { en: 'Center', fr: 'Milieu' },
-                        icon: 'tick',
-                    },
-                ],
-            },
-            defaultValue: true,
         },
     },
 };
