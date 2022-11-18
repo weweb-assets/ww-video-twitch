@@ -62,9 +62,19 @@ export default {
             // eslint-disable-next-line no-unreachable
             return false;
         },
-        videoId() {
+        typeAndId() {
+            const regexVideo = /(?:www|player)\.twitch\.tv\/(?:videos\/|\?video=)([^&]*)/;
+            const regexChannel = /(?:www|player)\.twitch\.tv\/(?:\?channel=)?([^&]*)/;
+
             if (!this.content.url) return {};
-            return this.content.url.split('tv/videos/')[1].split('?')[0];
+
+            const matchVideo = this.content.url.match(regexVideo);
+            if (matchVideo && matchVideo.length === 2) return { type: 'video', id: matchVideo[1] };
+
+            const matchChannel = this.content.url.match(regexChannel);
+            if (matchChannel && matchChannel.length === 2) return { type: 'channel', id: matchChannel[1] };
+
+            return {};
         },
         startTime() {
             if (typeof this.content.videoStartTime !== 'string') return '0h0m0s';
@@ -106,8 +116,10 @@ export default {
             this.componentKey += 1;
             await nextTick();
 
+            if (!this.typeAndId.type) return;
+
             this.player = new Twitch.Player(`twitch-player-${this.uniqueID}`, {
-                video: this.videoId,
+                [this.typeAndId.type]: this.typeAndId.id,
                 width: '100%',
                 height: '100%',
                 autoplay: this.isEditing ? false : this.content.autoplay,
