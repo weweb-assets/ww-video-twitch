@@ -7,7 +7,7 @@ export default {
             fr: 'Vidéo - Twitch',
             en: 'Vidéo - Twitch',
         },
-        icon: 'play',
+        icon: 'logo/youtube',
     },
     triggerEvents: [
         { name: 'play', label: { en: 'On play' }, event: { value: '' }, default: true },
