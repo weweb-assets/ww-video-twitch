@@ -157,7 +157,6 @@ export default {
         },
         playVideo() {
             if (!this.player) return;
-            console.log(this.player);
             this.player.play();
         },
         pauseVideo() {
