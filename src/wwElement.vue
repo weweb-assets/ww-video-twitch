@@ -155,6 +155,18 @@ export default {
                 this.$emit('trigger-event', { name: 'end', event: {} });
             });
         },
+        playVideo() {
+            if (!this.player) return;
+            this.player.play();
+        },
+        pauseVideo() {
+            if (!this.player) return;
+            this.player.pause();
+        },
+        seekTo(time) {
+            if (!this.player) return;
+            this.player.seek(time);
+        },
     },
 };
 </script>
