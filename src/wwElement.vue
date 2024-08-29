@@ -177,8 +177,10 @@ export default {
     overflow: hidden;
     aspect-ratio: 16 / 9;
 
-    &.editing {
-        pointer-events: none;
+    &.editing::after {
+        position: absolute;
+        inset: 0;
+        content: '';
     }
 
     iframe {

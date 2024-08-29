@@ -1,6 +1,6 @@
 export default {
     options: {
-        sizable: true,
+        ignoredStyleProperties: ['overflow', 'aspectRatio'],
     },
     editor: {
         label: {
